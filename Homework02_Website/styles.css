@@ -5,7 +5,12 @@
     padding: 10px;
 }
 
-.container
+th,tr,td
 {
-    height: 200px;
+    border: 2px solid black;
+}
+
+table
+{
+    width: 95%;
 }
