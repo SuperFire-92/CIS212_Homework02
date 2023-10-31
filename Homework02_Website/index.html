@@ -16,7 +16,7 @@
 
     <script>
       tinymce.init({
-        selector: '#mytextarea',
+        selector: '.mytextarea',
         plugins: [
           'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
           'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
@@ -29,7 +29,7 @@
     </script>
 
 </head>
-<body onload="loadPresetTitles()">
+<body onload="onStart()">
     <br>
     <h1 id="text_v_u_title">Home</h1>
     <br>
@@ -39,12 +39,10 @@
             <br><br>
             <Button id="btn_v_u_home" onclick="loadAllTitles()">Home</Button>
             <br><br>
-            <Button id="btn_v_u_post">Post</Button>
+            <Button id="btn_v_u_post" onclick="loadPost()">Post</Button>
         </div>
-        <div class="col">
-            <table id="table_v_u_postList">
-                
-            </table>
+        <div class="col" id="col_v_u_posts">
+
         </div>
     </div>
 </body>
