@@ -2,6 +2,9 @@ var listOfPosts;
 var listOfTitles;
 var listOfContents;
 var hasAddedPosts = false;
+var numOfInstances = 0;
+
+//#region index
 
 function onStart()
 {
@@ -31,7 +34,7 @@ function loadPresetTitles()
     {
         addPostToTable(listOfTitles[i],listOfPosts[i]);
     }
-    
+    //Also add all posts from listOfContents
     for (var i = 0; i < listOfContents.length; i++)
     {
         addFullPostToTable(listOfContents[i]);
@@ -117,6 +120,8 @@ function addFullPostToTable(content)
     hasAddedPosts = true;
 }
 
+//#endregion
+
 function addPostToArray(content)
 {
     listOfContents.push([content]);
@@ -131,57 +136,72 @@ function loadAllTitles()
     loadPresetTitles();
 }
 
-function loadPost()
-{
-    //Wipe the current table
-    wipeTable();
+// function loadPost()
+// {
+//     //Wipe the current table
+//     wipeTable();
 
-    //Load the post section
-    var col = document.getElementById("col_v_u_posts");
+//     //Load the post section
+//     var col = document.getElementById("col_v_u_posts");
 
-    var post = document.createElement("form");
-    post.setAttribute("method","post");
+//     var post = document.createElement("form");
+//     post.setAttribute("method","post");
 
-    var textBox = document.createElement("textarea");
-    textBox.setAttribute("class","mytextarea");
-    textBox.setAttribute("id","mytextarea");
+//     var textBox = document.createElement("textarea");
+//     textBox.setAttribute("class","mytextarea");
+//     textBox.setAttribute("id","mytextarea");
 
-    post.append(textBox);
-    col.append(post);
+//     post.append(textBox);
+//     col.append(post);
 
-    tinymce.init({
-        selector: '.mytextarea',
-        plugins: [
-          'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
-          'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
-          'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
-        ],
-        toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
-          'alignleft aligncenter alignright alignjustify | ' +
-          'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
-      });
+//     tinymce.init({
+//         selector: '.mytextarea',
+//         plugins: [
+//           'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+//           'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+//           'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+//         ],
+//         toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+//           'alignleft aligncenter alignright alignjustify | ' +
+//           'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
+//         init_instance_callback : function(numOfInstances)
+//         {
+//             console.log("Instance Number " + numOfInstances);
+//         }
+//     });
+//     numOfInstances++;
 
-    var button = document.createElement("button");
-    button.setAttribute("onclick","addPostButton()");
-    button.innerText = "Post";
+//     var button = document.createElement("button");
+//     button.setAttribute("onclick","addPostButton()");
+//     button.innerText = "Post";
 
-    var lineBreak = document.createElement("br");
+//     var lineBreak = document.createElement("br");
 
-    col.append(lineBreak);
-    col.append(button);
-}
+//     col.append(lineBreak);
+//     col.append(button);
+// }
 
 function wipeTable()
 {
+    if (document.getElementById("mytextarea") != null)
+    {
+        var textarea = document.getElementById("mytextarea")
+        textarea.remove();
+    }
     var col = document.getElementById("col_v_u_posts");
     col.innerHTML = "";
     hasAddedPosts = false;
 
-    if (document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux")[0] != null)
-    {
-        const element = document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux");
-        element[0].remove();
-    }
+    // if (document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux")[0] != null)
+    // {
+    //     var element = document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux");
+    //     element[0].remove();
+    // }
+    // if (document.getElementById("mce-u0") != null)
+    // {
+    //     var element = document.getElementById("mce-u0");
+    //     element.remove();
+    // }
 }
 
 function addPostButton()
