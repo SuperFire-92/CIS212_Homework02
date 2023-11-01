@@ -29,7 +29,7 @@
     </script>
 
 </head>
-<body onload="onStart()">
+<body onload="onPostStart()">
     <br>
     <h1 id="text_v_u_title">Home</h1>
     <br>
@@ -37,12 +37,18 @@
         <div class="col-sm-2" style="padding-left: 40px;">
             CIS212_Blog
             <br><br>
-            <Button id="btn_v_u_home" onclick="loadAllTitles()">Home</Button>
+            <Button id="btn_v_u_home" onclick="homeButton()">Home</Button>
             <br><br>
-            <Button id="btn_v_u_post" onclick="loadPost()">Post</Button>
+            <Button id="btn_v_u_post">Post</Button> <!--Intentionally not letting the user press this post button-->
         </div>
         <div class="col" id="col_v_u_posts">
-            
+            <form method="post">
+              <textarea class="mytextarea"></textarea>
+            </form>
+            <br>
+            <div class="CenterHorizontal">
+              <button id="btn_v_p_post" onclick="addPostButton()">Post</button>
+            </div>
         </div>
     </div>
 </body>

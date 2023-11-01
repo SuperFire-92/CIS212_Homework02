@@ -2,19 +2,28 @@ var listOfPosts;
 var listOfTitles;
 var listOfContents;
 var hasAddedPosts = false;
-var numOfInstances = 0;
+var numOfPosts = 0;
 
 //#region index
 
-function onStart()
+function onIndexStart()
 {
     listOfContents = new Array();
     loadPresetTitles();
 
+    if (sessionStorage.getItem("listOfContents") != null)
+    {
+        listOfContents = JSON.parse(sessionStorage.getItem("listOfContents"));
+
+        for (var i = 0; i < listOfContents.length; i++)
+        {
+            addFullPostToTable(listOfContents[i]);
+        }
+    }
     
 }
 
-//Load the two preset posts
+//Loads all titles
 function loadPresetTitles()
 {
     //Add them to the arrays
@@ -41,6 +50,7 @@ function loadPresetTitles()
     }
 }
 
+//For loading the two premade posts
 function addPostToTable(title, post)
 {
     //Get the table
@@ -75,6 +85,7 @@ function addPostToTable(title, post)
 
     //Make the row and cell
     row = table.insertRow(numRows);
+    row.setAttribute("onclick","postClick(" + numOfPosts + ")")
     cell = row.insertCell(numCols);
 
     //Insert the header and paragraph into the cell
@@ -83,8 +94,10 @@ function addPostToTable(title, post)
 
     //Tell future runs that there are posts
     hasAddedPosts = true;
+    numOfPosts++;
 }
 
+//For loading the posts made by the user
 function addFullPostToTable(content)
 {
     //Get the table
@@ -111,6 +124,7 @@ function addFullPostToTable(content)
 
     //Make the row and cell
     row = table.insertRow(numRows);
+    row.setAttribute("onclick","postClick(" + numOfPosts + ")")
     cell = row.insertCell(numCols);
 
     //Insert the content into the cell
@@ -118,94 +132,65 @@ function addFullPostToTable(content)
 
     //Tell future runs that there are posts
     hasAddedPosts = true;
+    numOfPosts++;
+}
+
+//Loads every title
+function loadAllTitles()
+{
+    //Load the preset titles
+    loadPresetTitles();
+}
+
+//Used for the home button
+function homeButton()
+{
+    sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+
+    location.href="index.html";
+}
+
+//Used for the post button (for navigating the screen)
+function postButton()
+{
+    sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+
+    location.href="post.html";
+}
+
+//Used for pressing on a post
+function postClick(num)
+{
+    console.log("Post " + num + " Clicked!");
 }
 
 //#endregion
 
+//#region post
+
+//Gets the list of contents
+function onPostStart()
+{
+    listOfContents = new Array();
+
+    if (sessionStorage.getItem("listOfContents") != null)
+    {
+        listOfContents = JSON.parse(sessionStorage.getItem("listOfContents"));
+    }
+}
+
+//Adds a new post to the list of contents
 function addPostToArray(content)
 {
     listOfContents.push([content]);
 }
 
-function loadAllTitles()
-{
-    //Wipe the current table
-    wipeTable();
-
-    //Load the preset titles
-    loadPresetTitles();
-}
-
-// function loadPost()
-// {
-//     //Wipe the current table
-//     wipeTable();
-
-//     //Load the post section
-//     var col = document.getElementById("col_v_u_posts");
-
-//     var post = document.createElement("form");
-//     post.setAttribute("method","post");
-
-//     var textBox = document.createElement("textarea");
-//     textBox.setAttribute("class","mytextarea");
-//     textBox.setAttribute("id","mytextarea");
-
-//     post.append(textBox);
-//     col.append(post);
-
-//     tinymce.init({
-//         selector: '.mytextarea',
-//         plugins: [
-//           'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
-//           'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
-//           'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
-//         ],
-//         toolbar: 'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
-//           'alignleft aligncenter alignright alignjustify | ' +
-//           'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
-//         init_instance_callback : function(numOfInstances)
-//         {
-//             console.log("Instance Number " + numOfInstances);
-//         }
-//     });
-//     numOfInstances++;
-
-//     var button = document.createElement("button");
-//     button.setAttribute("onclick","addPostButton()");
-//     button.innerText = "Post";
-
-//     var lineBreak = document.createElement("br");
-
-//     col.append(lineBreak);
-//     col.append(button);
-// }
-
-function wipeTable()
-{
-    if (document.getElementById("mytextarea") != null)
-    {
-        var textarea = document.getElementById("mytextarea")
-        textarea.remove();
-    }
-    var col = document.getElementById("col_v_u_posts");
-    col.innerHTML = "";
-    hasAddedPosts = false;
-
-    // if (document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux")[0] != null)
-    // {
-    //     var element = document.getElementsByClassName("tox tox-silver-sink tox-tinymce-aux");
-    //     element[0].remove();
-    // }
-    // if (document.getElementById("mce-u0") != null)
-    // {
-    //     var element = document.getElementById("mce-u0");
-    //     element.remove();
-    // }
-}
-
+//Handles the add post button
 function addPostButton()
 {
-    var editorContent = tinymce.get("mytextarea").getContent();
+    var editorContent = tinymce.activeEditor.getContent();
     addPostToArray(editorContent);
+    tinymce.activeEditor.setContent("");
 }
+
+//#endregion post

@@ -8,9 +8,32 @@
 th,tr,td
 {
     border: 2px solid black;
+    
+}
+
+tr:hover
+{
+    background-color: #EEEEEE;
 }
 
 table
 {
     width: 95%;
+}
+
+#btn_v_p_post
+{
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+}
+
+.CenterHorizontal
+{
+    margin: 0;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
