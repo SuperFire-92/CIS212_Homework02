@@ -9,26 +9,18 @@ var numOfPosts = 0;
 function onIndexStart()
 {
     listOfContents = new Array();
-    loadPresetTitles();
+
+    //loadPresetTitles();
 
     if (sessionStorage.getItem("listOfContents") != null)
     {
         listOfContents = JSON.parse(sessionStorage.getItem("listOfContents"));
-
-        for (var i = 0; i < listOfContents.length; i++)
-        {
-            addFullPostToTable(listOfContents[i]);
-        }
+        
     }
-    
-}
-
-//Loads all titles
-function loadPresetTitles()
-{
-    //Add them to the arrays
-    listOfTitles = new Array("Test1","Test2");
-    listOfPosts = new Array("This is the first test","This is a sequel to test1");
+    else
+    {
+        listOfContents.push("<h1>Test1</h1><p>This is the first test</p>","<h1>Test2</h1><p>This is a sequel to test1</p>");
+    }
 
     //Place the table into the column
     var col = document.getElementById("col_v_u_posts");
@@ -38,64 +30,85 @@ function loadPresetTitles()
 
     col.append(table);
 
-    //Add them both
-    for (var i = 0; i < listOfPosts.length; i++)
-    {
-        addPostToTable(listOfTitles[i],listOfPosts[i]);
-    }
-    //Also add all posts from listOfContents
     for (var i = 0; i < listOfContents.length; i++)
     {
         addFullPostToTable(listOfContents[i]);
     }
 }
 
-//For loading the two premade posts
-function addPostToTable(title, post)
-{
-    //Get the table
-    var table = document.getElementById("table_v_u_postList");
+// //Loads all titles
+// function loadPresetTitles()
+// {
+//     //Add them to the arrays
+//     listOfTitles = new Array("Test1","Test2");
+//     listOfPosts = new Array("This is the first test","This is a sequel to test1");
 
-    //If this is not the first post
-    if (hasAddedPosts)
-    {
-        //Set the number of rows and columns
-        var numRows = table.rows.length;
-        var numCols = table.rows[0].cells.length - 1;
-        var row;
-        var cell;
-    }
-    //If it is the first post
-    else
-    {
-        //The rows and columns are 0
-        var numRows = 0;
-        var numCols = 0;
-        var row;
-        var cell;
-    }
+//     //Place the table into the column
+//     var col = document.getElementById("col_v_u_posts");
 
-    //Create the header
-    var header = document.createElement("h1");
-    header.innerText = title;
+//     var table = document.createElement("table")
+//     table.setAttribute("id","table_v_u_postList");
 
-    //Create the paragraph
-    var paragraph = document.createElement("p");
-    paragraph.innerText = post;
+//     col.append(table);
 
-    //Make the row and cell
-    row = table.insertRow(numRows);
-    row.setAttribute("onclick","postClick(" + numOfPosts + ")")
-    cell = row.insertCell(numCols);
+//     //Add them both
+//     for (var i = 0; i < listOfPosts.length; i++)
+//     {
+//         addPostToTable(listOfTitles[i],listOfPosts[i]);
+//     }
+//     //Also add all posts from listOfContents
+//     for (var i = 0; i < listOfContents.length; i++)
+//     {
+//         addFullPostToTable(listOfContents[i]);
+//     }
+// }
 
-    //Insert the header and paragraph into the cell
-    cell.appendChild(header);
-    cell.appendChild(paragraph);
+// //For loading the two premade posts
+// function addPostToTable(title, post)
+// {
+//     //Get the table
+//     var table = document.getElementById("table_v_u_postList");
 
-    //Tell future runs that there are posts
-    hasAddedPosts = true;
-    numOfPosts++;
-}
+//     //If this is not the first post
+//     if (hasAddedPosts)
+//     {
+//         //Set the number of rows and columns
+//         var numRows = table.rows.length;
+//         var numCols = table.rows[0].cells.length - 1;
+//         var row;
+//         var cell;
+//     }
+//     //If it is the first post
+//     else
+//     {
+//         //The rows and columns are 0
+//         var numRows = 0;
+//         var numCols = 0;
+//         var row;
+//         var cell;
+//     }
+
+//     //Create the header
+//     var header = document.createElement("h1");
+//     header.innerText = title;
+
+//     //Create the paragraph
+//     var paragraph = document.createElement("p");
+//     paragraph.innerText = post;
+
+//     //Make the row and cell
+//     row = table.insertRow(numRows);
+//     row.setAttribute("onclick","postClick(" + numOfPosts + ")")
+//     cell = row.insertCell(numCols);
+
+//     //Insert the header and paragraph into the cell
+//     cell.appendChild(header);
+//     cell.appendChild(paragraph);
+
+//     //Tell future runs that there are posts
+//     hasAddedPosts = true;
+//     numOfPosts++;
+// }
 
 //For loading the posts made by the user
 function addFullPostToTable(content)
@@ -135,13 +148,6 @@ function addFullPostToTable(content)
     numOfPosts++;
 }
 
-//Loads every title
-function loadAllTitles()
-{
-    //Load the preset titles
-    loadPresetTitles();
-}
-
 //Used for the home button
 function homeButton()
 {
@@ -161,10 +167,27 @@ function postButton()
 //Used for pressing on a post
 function postClick(num)
 {
-    console.log("Post " + num + " Clicked!");
+    sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+    sessionStorage.setItem("indexOfContent", num);
+
+    location.href="postview.html";
 }
 
 //#endregion
+
+//#region postview
+
+function onPostViewStart()
+{
+    var index = sessionStorage.getItem("indexOfContent");
+    listOfContents = JSON.parse(sessionStorage.getItem("listOfContents"));
+
+    var col = document.getElementById("col_v_u_posts");
+
+    col.innerHTML = listOfContents[index];
+}
+
+//#endregion postview
 
 //#region post
 
