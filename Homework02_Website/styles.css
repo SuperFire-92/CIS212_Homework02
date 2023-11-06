@@ -37,3 +37,8 @@ table
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+
+#input_v_p_title
+{
+    width: 95%;
+}
