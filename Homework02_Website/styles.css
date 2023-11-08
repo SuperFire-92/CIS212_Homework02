@@ -38,7 +38,7 @@ table
     transform: translate(-50%, -50%);
 }
 
-#input_v_p_title
+#input_v_p_title, #input_v_p_category
 {
     width: 95%;
 }

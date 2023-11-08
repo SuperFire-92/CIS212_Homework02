@@ -6,6 +6,11 @@ var numOfPosts = 0;
 
 //#region index
 
+class Content
+{
+
+}
+
 function onIndexStart()
 {
     listOfContents = new Array();
@@ -176,16 +181,26 @@ function addPostButton()
 {
     //Gets the content of the tinymce text editor
     var editorContent = tinymce.activeEditor.getContent();
-    //Gets the cotent of the title input
+    //Gets the content of the title input
     var titleContent = "<h1>" + document.getElementById("input_v_p_title").value + "</h1>";
-    //Adds them together to create a post in the proper format
-    var content = titleContent + editorContent;
-    //Adds the post into the array
-    addPostToArray(content);
-    //Wipes the tinymce editor to be empty
-    tinymce.activeEditor.setContent("");
-    //Wipes the title input to be empty
-    document.getElementById("input_v_p_title").value = "";
+    //Gets the content of the category input
+    var categoryContent = "<h3>" + document.getElementById("input_v_p_category").value + ", ";
+    //Set up the date
+    const date = new Date(Date.now());
+    var dateContent = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + "</h3>";
+    //Ensure there is something in the title and editor
+    if (editorContent != "" && titleContent != "<h1></h1>" && categoryContent != "<h3>, ")
+    {
+        //Adds them together to create a post in the proper format
+        var content = titleContent + categoryContent + dateContent + editorContent;
+        //Adds the post into the array
+        addPostToArray(content);
+        //Wipes the tinymce editor to be empty
+        tinymce.activeEditor.setContent("");
+        //Wipes the title input to be empty
+        document.getElementById("input_v_p_title").value = "";
+        document.getElementById("input_v_p_category").value = "";
+    }
 }
 
 //#endregion post
