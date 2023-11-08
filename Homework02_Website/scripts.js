@@ -90,15 +90,21 @@ function addFullPostToTable(content)
 //Used for the home button
 function homeButton()
 {
-    sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
-
+    if (listOfContents != null)
+    {
+        sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+    }
+    
     location.href="index.html";
 }
 
 //Used for the post button
 function postButton()
 {
-    sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+    if (listOfContents != null)
+    {
+        sessionStorage.setItem("listOfContents", JSON.stringify(listOfContents));
+    }
 
     location.href="post.html";
 }
