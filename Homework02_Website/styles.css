@@ -33,12 +33,18 @@ body
     font-size: 30px;
 }
 
+#btn_v_pv_delete
+{
+    background-color: #898989;
+}
+
+
 .CenterHorizontal
 {
     margin: 0;
     position: absolute;
-    top: 110%;
-    left: 50%;
+    top: 90%;
+    left: 47%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }

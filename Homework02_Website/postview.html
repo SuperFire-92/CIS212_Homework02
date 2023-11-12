@@ -35,22 +35,20 @@
     <h1 id="text_v_u_title">Post View</h1>
     <br>
     <div class="row">
-        <div class="col-sm-2" style="padding-left: 40px; padding-bottom: 100%; background-color: #898989;">
+        <div class="col-sm-2" style="padding-left: 40px; padding-bottom: 30%; background-color: #898989;">
             Animal Recipes
             <br><br>
             <Button id="btn_v_u_home" onclick="homeButton()">Home</Button>
             <br><br>
             <Button id="btn_v_u_post" onclick="postButton()">Post</Button>
         </div>
-        <div class="col" id="col_v_u_posts">
-
+        <div class="col">
+          <div id = "col_v_u_posts">
+            <!--This will be where the posts appear-->
+          </div>
+          <br>
+          <button id="btn_v_pv_delete" onclick="deletePostButton()">Delete Post</button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-2" style="padding-left: 40px;">
-        </div>
-        <div class="col">
-            <button id="btn_v_pv_delete" onclick="deletePostButton()">Delete Post</button>
-        </div>
-</body>
+  </body>
 </html>

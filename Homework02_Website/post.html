@@ -35,12 +35,13 @@
     <h1 id="text_v_u_title">Make A Post</h1>
     <br>
     <div class="row">
-        <div class="col-sm-2" style="padding-left: 40px; padding-bottom: 100%; background-color: #898989;">
+        <div class="col-sm-2" style="padding-left: 40px; padding-bottom: 30%; background-color: #898989;">
             Animal Recipes
             <br><br>
             <Button id="btn_v_u_home" onclick="homeButton()">Home</Button>
             <br><br>
-            <Button id="btn_v_u_post">Post</Button> <!--Intentionally not letting the user press this post button-->
+            <Button id="btn_v_u_post">Post</Button> <!--Intentionally not letting the user press this post button,
+                                                        as it would uselessly refresh the textbox and delete all values.-->
         </div>
         <div class="col" id="col_v_u_posts">
           <input type="text" id="input_v_p_title" placeholder="Title">
