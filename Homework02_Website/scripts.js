@@ -6,11 +6,6 @@ var numOfPosts = 0;
 
 //#region index
 
-class Content
-{
-
-}
-
 function onIndexStart()
 {
     listOfContents = new Array();
@@ -23,7 +18,9 @@ function onIndexStart()
     //If this is the first time the user has been to this page, set up the array with premade posts
     else
     {
-        listOfContents.push("<h1>Test1</h1><p>This is the first test</p>","<h1>Test2</h1><p>This is a sequel to test1</p>");
+        listOfContents.push("<h1>Spider Soup</h1><h2>Spider Food, 11/10/2023</h2><p>Making spider soup is shockingly easy. It requires ingredients that any spider should have. All you need are two flies, a mosquito, some maggots, and web fluid. Stir al of these into a bowl, and let it cook on low for 20 minutes. Then it's all ready to eat!</p>",
+        "<h1>Lion Burgers</h1><h2>Lion Food, 11/10/2023</h2><p>Are you a lion that needs to make sure his pride is content with his cooking? Well look no further! Today I have a recipe that will blow away all of your mates and cubs. First you'll need to catch an antelope. You can find these out in the wild, or feel free to steal a carcass you find lying around too. You'll cut up the meat into circular shapes, weighing about half a pound each. Grill them, and sprinkle our patented Lion Seasoning onto them (further instruction stored on the product). Place on a bun, with lettuce, tomato, and mayo, and serve.</p>",
+        "<h1>Chicken Nuggets</h1><h2>Chicken Food, 11/11/2023</h2><p><p>");
     }
 
     //If the postview has passed an item to delete, delete it.
@@ -60,24 +57,11 @@ function addFullPostToTable(content)
     //Get the table
     var table = document.getElementById("table_v_u_postList");
 
-    //If this is not the first post
-    if (hasAddedPosts)
-    {
-        //Set the number of rows and columns
-        var numRows = table.rows.length;
-        var numCols = table.rows[0].cells.length - 1;
-        var row;
-        var cell;
-    }
-    //If it is the first post
-    else
-    {
-        //The rows and columns are 0
-        var numRows = 0;
-        var numCols = 0;
-        var row;
-        var cell;
-    }
+    //Setting these values to 0 ensures new posts appear at the top of the page.
+    var numRows = 0;
+    var numCols = 0;
+    var row;
+    var cell;
 
     //Make the row and cell
     row = table.insertRow(numRows);

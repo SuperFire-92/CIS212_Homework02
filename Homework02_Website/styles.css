@@ -1,7 +1,7 @@
 #text_v_u_title
 {
     text-align: center;
-    background-color: #EEEEEE;
+    background-color: #898989;
     padding: 10px;
 }
 
@@ -13,12 +13,17 @@ th,tr,td
 
 tr:hover
 {
-    background-color: #EEEEEE;
+    background-color: #898989;
 }
 
 table
 {
     width: 95%;
+}
+
+body
+{
+    background-color: #A0A0A0;
 }
 
 #btn_v_p_post
@@ -41,4 +46,9 @@ table
 #input_v_p_title, #input_v_p_category
 {
     width: 95%;
+}
+
+#btn_v_u_post, #btn_v_u_home
+{
+    background-color: #898989;
 }
