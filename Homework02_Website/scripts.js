@@ -1,3 +1,9 @@
+//=================================================
+//Name: Nicolaas Dyk
+//Date: 11/12/2023
+//Desc: Blog Website with sessionStorage
+//=================================================
+
 var listOfPosts;
 var listOfTitles;
 var listOfContents;
